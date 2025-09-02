@@ -35,7 +35,7 @@ int main() {
     printf("Pontos turísticos: %d\n", pontos_turisticos2);
 
      float densidade1 = populacao / area;
-    float pib_per_capita1 = (pib * 1000000000) / populacao; // PIB convertido para reais
+    float pib_per_capita1 = (pib * 1000000000) / populacao;
 
     float densidade2 = populacao2 / area2;
     float pib_per_capita2 = (pib2 * 1000000000) / populacao2;
