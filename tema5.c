@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+// Definições
+#define TAMANHO_TABULEIRO 10
+#define TAMANHO_NAVIO 3
+#define AGUA 0
+#define NAVIO 1
+
+// Protótipos
 bool validar_posicao(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int linha_inicial, int coluna_inicial, int direcao, int tamanho);
 void posicionar_navio(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int linha_inicial, int coluna_inicial, int direcao, int tamanho);
 void exibir_tabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]);
@@ -8,12 +15,14 @@ void exibir_tabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]);
 int main() {
     int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO];
 
+    // Inicializa o tabuleiro
     for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
         for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
             tabuleiro[i][j] = AGUA;
         }
     }
 
+    // Lista de navios (linha, coluna, direção)
     int navios[4][3] = {
         {1, 1, 0}, // Navio 1: Horizontal
         {5, 8, 1}, // Navio 2: Vertical
@@ -33,21 +42,22 @@ int main() {
         if (validar_posicao(tabuleiro, linha, coluna, direcao, TAMANHO_NAVIO)) {
             posicionar_navio(tabuleiro, linha, coluna, direcao, TAMANHO_NAVIO);
             navios_posicionados++;
-            printf("Navio %d posicionado com sucesso em (%d, %d), direção %d.\n", k + 1, linha, coluna, direcao);
+            printf("Navio %d posicionado em (%d, %d), direção %d.\n", k + 1, linha, coluna, direcao);
         } else {
-            printf("ERRO: O Navio %d não pôde ser posicionado em (%d, %d), direção %d (Limites ou Sobreposição).\n", k + 1, linha, coluna, direcao);
+            printf("ERRO: Navio %d não pôde ser posicionado em (%d, %d), direção %d.\n", k + 1, linha, coluna, direcao);
         }
     }
 
     printf("\nTotal de navios posicionados: %d/4\n", navios_posicionados);
     
-    printf("\n--- Tabuleiro Final do Batalha Naval ---\n");
+    printf("\n--- Tabuleiro Final ---\n");
     exibir_tabuleiro(tabuleiro);
     printf("Legenda: %d = Água, %d = Navio\n", AGUA, NAVIO);
     
     return 0;
 }
 
+// Verifica se cabe o navio
 bool validar_posicao(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int linha_inicial, int coluna_inicial, int direcao, int tamanho) {
     for (int i = 0; i < tamanho; i++) {
         int l = linha_inicial;
@@ -71,6 +81,7 @@ bool validar_posicao(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int li
     return true;
 }
 
+// Posiciona o navio no tabuleiro
 void posicionar_navio(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int linha_inicial, int coluna_inicial, int direcao, int tamanho) {
     for (int i = 0; i < tamanho; i++) {
         int l = linha_inicial;
@@ -87,6 +98,7 @@ void posicionar_navio(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int l
     }
 }
 
+// Exibe o tabuleiro formatado
 void exibir_tabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]) {
     printf("   ");
     for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
@@ -94,7 +106,6 @@ void exibir_tabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]) {
     }
     printf("\n");
 
-    // Linha de separação ajustada dinamicamente
     printf("  +");
     for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
         printf("---");
@@ -109,6 +120,3 @@ void exibir_tabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]) {
         printf("\n");
     }
 }
-
-
-
