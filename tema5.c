@@ -93,8 +93,13 @@ void exibir_tabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]) {
         printf("%3d", j);
     }
     printf("\n");
-    
-    printf("  +---------------------------------------------------\n");
+
+    // Linha de separação ajustada dinamicamente
+    printf("  +");
+    for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+        printf("---");
+    }
+    printf("\n");
 
     for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
         printf("%2d|", i);
@@ -104,5 +109,6 @@ void exibir_tabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]) {
         printf("\n");
     }
 }
+
 
 
